@@ -13,6 +13,15 @@
 <p>
   <strong>Picture:</strong>
   <%= image_tag(@idea.picture_url, :width => 600) if @idea.picture.present? %>
+  <h3>Comments</h3>
+<% @idea.comments.each do |comment| %>
+  <div>
+    <strong><%= comment.user_name %></strong>
+    <br />
+    <p><%= comment.body %></p>
+  </div>
+<% end %>
+<%= render 'comments/form' %>
 </p>
 
 <%= link_to 'Edit', edit_idea_path(@idea) %> |

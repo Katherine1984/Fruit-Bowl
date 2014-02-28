@@ -26,11 +26,27 @@
         <li class="active"><a href="/ideas">Ideas</a></li>
         <li class="active"><a href="/pages/info">Info</a></li>
       </ul>
+      <p class="navbar-text pull-right user-nav">
+<% if user_signed_in? %>
+  Logged in as <strong><%= current_user.email %></strong>.
+  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+  <%= image_tag current_user.gravatar_url %>
+<% else %>
+  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+<% end %>
     </div>
   </div>
 </nav>
 
   <div class="container">
+    <% if notice %>
+  <p class="alert alert-notice"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert alert-error"><%= alert %></p>
+<% end %>
 	<%= yield %>
   </div>
 
